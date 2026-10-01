@@ -72,6 +72,8 @@ export interface ProcurementOrder {
   deliveryAddress: string;
   contactPerson: string;
   contactPhone: string;
+  paymentMethod: 'Bank Transfer' | 'Institutional Invoice' | 'Pay on Delivery';
+  paymentStatus: 'Pending';
   items: {
     drugId: string;
     brandName: string;

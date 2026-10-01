@@ -42,6 +42,7 @@ export const CartModal: React.FC<CartModalProps> = ({
   const [contactName, setContactName] = useState('Pharm. K. C. Nwankwo');
   const [contactPhone, setContactPhone] = useState('+234 803 555 1290');
   const [pcnLicense, setPcnLicense] = useState('PCN/RN/09214');
+  const [paymentMethod, setPaymentMethod] = useState<ProcurementOrder['paymentMethod']>('Bank Transfer');
   const [confirmedOrder, setConfirmedOrder] = useState<ProcurementOrder | null>(null);
 
   if (!isOpen) return null;
@@ -81,6 +82,8 @@ export const CartModal: React.FC<CartModalProps> = ({
       deliveryAddress: customAddress,
       contactPerson: `${contactName} (${pcnLicense})`,
       contactPhone,
+      paymentMethod,
+      paymentStatus: 'Pending',
       items: cart.map(i => ({
         drugId: i.drug.id,
         brandName: i.drug.brandName,
@@ -309,6 +312,44 @@ export const CartModal: React.FC<CartModalProps> = ({
                   </div>
                 </div>
 
+                {/* Payment Method */}
+                <div className="p-4 rounded-xl border border-slate-200 space-y-3">
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Payment Method</h4>
+                    <p className="text-[11px] text-slate-500 mt-1">Choose how your facility will settle this requisition.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {([
+                      { value: 'Bank Transfer', detail: 'Settle by bank transfer' },
+                      { value: 'Institutional Invoice', detail: 'Bill to your institution' },
+                      { value: 'Pay on Delivery', detail: 'Settle when delivered' }
+                    ] as const).map((option) => (
+                      <label
+                        key={option.value}
+                        className={`flex items-start gap-2 p-3 rounded-lg border cursor-pointer transition-colors ${
+                          paymentMethod === option.value
+                            ? 'border-emerald-600 bg-emerald-50'
+                            : 'border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="payment-method"
+                          value={option.value}
+                          checked={paymentMethod === option.value}
+                          onChange={() => setPaymentMethod(option.value)}
+                          className="mt-0.5 accent-emerald-600"
+                        />
+                        <span>
+                          <span className="block text-xs font-semibold text-slate-800">{option.value}</span>
+                          <span className="block text-[10px] text-slate-500 mt-0.5">{option.detail}</span>
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                  <p className="text-[11px] text-slate-500">Payment is not collected here. Your selected method will be included with the requisition for supplier follow-up.</p>
+                </div>
+
                 {/* Total & Confirmation */}
                 <div className="border-t border-slate-200 pt-4 space-y-3">
                   <div className="flex justify-between items-center text-sm">
@@ -393,6 +434,12 @@ export const CartModal: React.FC<CartModalProps> = ({
                   <div className="flex justify-between items-center pt-2 font-bold text-sm text-slate-900">
                     <span>Total Consignment Value</span>
                     <span className="font-mono text-emerald-700">{formatNaira(confirmedOrder.totalAmountNGN)}</span>
+                  </div>
+                  <div className="flex justify-between items-center border-t border-slate-100 pt-2">
+                    <span className="text-slate-500">Payment</span>
+                    <span className="text-right font-semibold text-slate-800">
+                      {confirmedOrder.paymentMethod} · {confirmedOrder.paymentStatus}
+                    </span>
                   </div>
                 </div>
 
