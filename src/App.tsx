@@ -32,7 +32,7 @@ import {
 export default function App() {
   // Region selection: defaults to Enugu State (Enugu North - Ogbete & GRA)
   const [currentLocation, setCurrentLocation] = useState<RegionalLocation>(REGIONAL_LOCATIONS[0]);
-  const [activeTab, setActiveTab] = useState<'verify' | 'procure' | 'network' | 'alerts'>('verify');
+  const [activeTab, setActiveTab] = useState<'verify' | 'procure' | 'network' | 'alerts'>('procure');
   
   // Data state
   const [drugs, setDrugs] = useState<DrugRecord[]>(INITIAL_DRUGS);
