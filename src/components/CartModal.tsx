@@ -347,6 +347,29 @@ export const CartModal: React.FC<CartModalProps> = ({
                       </label>
                     ))}
                   </div>
+                  {paymentMethod === 'Bank Transfer' && (
+                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <h5 className="text-xs font-bold text-emerald-950">Bank Transfer Details</h5>
+                        <span className="text-[10px] font-bold uppercase text-amber-800 bg-amber-100 border border-amber-200 rounded px-2 py-0.5">
+                          Demo only
+                        </span>
+                      </div>
+                      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
+                        <dt className="text-slate-500">Bank</dt>
+                        <dd className="font-semibold text-slate-800">Demo Bank (Sandbox)</dd>
+                        <dt className="text-slate-500">Account name</dt>
+                        <dd className="font-semibold text-slate-800">Enugu State Medical Supply Procurement (Demo)</dd>
+                        <dt className="text-slate-500">Account number</dt>
+                        <dd className="font-mono font-bold text-slate-900">0000000000</dd>
+                        <dt className="text-slate-500">Transfer reference</dt>
+                        <dd className="font-semibold text-slate-800">{institutionName}</dd>
+                      </dl>
+                      <p className="text-[11px] font-medium text-amber-900">
+                        Prototype account details only. Do not transfer funds.
+                      </p>
+                    </div>
+                  )}
                   <p className="text-[11px] text-slate-500">Payment is not collected here. Your selected method will be included with the requisition for supplier follow-up.</p>
                 </div>
 
