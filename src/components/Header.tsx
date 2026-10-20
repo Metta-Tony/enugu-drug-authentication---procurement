@@ -80,15 +80,13 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-950/40 border border-emerald-400/30">
                 <ShieldCheck className="w-7 h-7 text-white" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <span>PharmaVerify</span>
-                    <span className="text-emerald-400 font-normal text-sm px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60">
-                      Enugu & South East
-                    </span>
-                  </h1>
-                </div>
+              <div className="min-w-0">
+                <h1 className="text-base sm:text-lg font-bold tracking-tight leading-snug text-white">
+                  Design and Implementation of a Drug Authentication and Procurement System
+                </h1>
+                <span className="inline-block mt-1 text-emerald-400 font-normal text-xs px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60">
+                  Enugu & South East
+                </span>
                 <p className="text-xs text-slate-400">
                   Real-time Anti-Counterfeit Drug Authentication & Hospital Bulk Procurement
                 </p>
